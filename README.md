@@ -29,7 +29,7 @@ pip install labels
 Docker images are available from GitHub and DockerHub.
 
 ```console
-docker run -it -e LABELS_TOKEN="${LABELS_TOKEN}" \
+docker run -it -e LABELS_TOKEN="${LABELS_TOKEN}" -e LABELS_USERNAME="${LABELS_USERNAME}" \
   -v $(pwd)/labels.toml:/home/labels/labels.toml:rw \
   asaharan3/labels:main \
   sync \
@@ -47,7 +47,7 @@ You can install this as Github Actions.
 on:
   push:
     branches:
-      - master
+      - main
     paths:
     - '.github/**'
 name: labels
@@ -76,6 +76,7 @@ labels for a public or a private repository. Then set up two environment
 variables in your terminal:
 
 ```bash
+export LABELS_USERNAME="<GITHUB_USERNAME>"
 export LABELS_TOKEN="<GITHUB_TOKEN>"
 ```
 

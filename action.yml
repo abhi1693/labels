@@ -15,6 +15,9 @@ inputs:
     description: "Labels file"
     required: false
     default: ".github/labels.toml"
+  username:
+    description: "Github username"
+    required: true
   token:
     description: "GitHub token"
     required: true

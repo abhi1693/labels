@@ -17,4 +17,5 @@ jobs:
       - name: sync labels
         uses: abhi1693/labels@main
         with:
+          username: abhi1693
           token: ${{ secrets.GITHUB_TOKEN }}

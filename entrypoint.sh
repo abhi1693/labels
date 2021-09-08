@@ -27,4 +27,4 @@ else
 fi
 
 echo "Running Labels Sync"
-labels -v -t "${INPUT_TOKEN}" sync -o "${INPUT_OWNER}" -r "${INPUT_REPO}" -f "${INPUT_FILE}"
+labels -v -u "${INPUT_USERNAME}" -t "${INPUT_TOKEN}" sync -o "${INPUT_OWNER}" -r "${INPUT_REPO}" -f "${INPUT_FILE}"
