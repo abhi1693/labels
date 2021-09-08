@@ -13,7 +13,7 @@ RUN apk add --no-cache curl libffi-dev openssl-dev python3-dev gcc musl-dev && \
       --no-cache-dir \
       --prefix=/install \
       . && \
-     chmod +x src/entrypoint.sh
+     chmod +x entrypoint.sh
 
 # Base Labels Image
 FROM base as release
