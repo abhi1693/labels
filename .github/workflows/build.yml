@@ -56,7 +56,7 @@ jobs:
 
   # Build docker images
   docker:
-    needs: [lint, test]
+    needs: [tox]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
