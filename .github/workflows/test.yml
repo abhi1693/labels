@@ -12,7 +12,7 @@ on:
 name: dogfood
 jobs:
   labels:
-    name: dogfood
+    name: test
     runs-on: ubuntu-latest
     steps:
       - name: sync labels
