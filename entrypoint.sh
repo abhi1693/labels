@@ -3,7 +3,7 @@
 set -eo pipefail
 
 # Labels sync Action
-if [ -z "${INPUT_OWNER}" ]; then
+if [ -z "${INPUT_USERNAME}" ]; then
     echo "Parse owner from GITHUB_REPOSITORY : ${GITHUB_REPOSITORY}"
     INPUT_OWNER="$(echo "$GITHUB_REPOSITORY" | cut -d '/' -f1)"
 fi
@@ -27,4 +27,4 @@ else
 fi
 
 echo "Running Labels Sync"
-labels -v -u "${INPUT_USERNAME}" -t "${INPUT_TOKEN}" sync -o "${INPUT_OWNER}" -r "${INPUT_REPO}" -f "${INPUT_FILE}"
+labels -v -u "${INPUT_OWNER}" -t "${INPUT_TOKEN}" sync -o "${INPUT_OWNER}" -r "${INPUT_REPO}" -f "${INPUT_FILE}"
