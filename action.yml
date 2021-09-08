@@ -1,0 +1,24 @@
+name: "Manage Issue Labels"
+author: "Abhimanyu Saharan"
+description: "Sync/Manage issue labels defined in .github/labels.toml"
+branding:
+  icon: "tag"
+  color: "blue"
+inputs:
+  owner:
+    description: "Repository owner's username"
+    required: false
+  repo:
+    description: "Name of the repository (Without owner/org name)"
+    required: false
+  file:
+    description: "Labels file"
+    required: false
+    default: ".github/labels.toml"
+  token:
+    description: "GitHub token"
+    required: true
+runs:
+  using: "docker"
+  image: "docker://abhi1693/labels:1.0.0"
+  entrypoint: /usr/local/bin/entrypoint.sh

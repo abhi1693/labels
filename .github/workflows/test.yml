@@ -1,0 +1,21 @@
+on:
+  push:
+    branches:
+      - master
+      - dev
+    paths-ignore:
+      - ".gitignore"
+      - ".envrc"
+      - "**.md"
+      - ".dependabot/**"
+      - "_config.yml"
+name: dogfood
+jobs:
+  labels:
+    name: dogfood
+    runs-on: ubuntu-latest
+    steps:
+      - name: sync labels
+        uses: abhi1693/labels@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}

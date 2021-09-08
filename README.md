@@ -2,6 +2,18 @@
 
 CLI app for managing GitHub labels for Python 3.6 and newer. 📝
 
+[![actions](https://github.com/abhi1693/labels/workflows/build/badge.svg)](https://github.com/abhi1693/labels/actions?workflow=build)
+[![test](https://github.com/abhi1693/labels/workflows/test/badge.svg)](https://github.com/abhi1693/labels/actions?workflow=test)
+[![tag](https://img.shields.io/github/v/tag/abhi1693/labels?label=version)](https://github.com/marketplace/actions/manage-issue-labels)
+[![dependabot](https://api.dependabot.com/badges/status?host=github&repo=abhi1693/labels)](https://app.dependabot.com)
+![license](https://img.shields.io/github/license/abhi1693/labels?color=orange)
+
+## PyPI (managed by upstream)
+
+[![PyPI](https://img.shields.io/pypi/v/labels?color=brightgreen&logo=python&logoColor=white)](https://pypi.org/project/labels/)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/labels?logo=python&logoColor=white)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/labels?logo=python&logoColor=white)
+
 ## Installation
 
 **labels** is available for download from [PyPI][PyPI] via [pip][pip]:
@@ -10,7 +22,50 @@ CLI app for managing GitHub labels for Python 3.6 and newer. 📝
 pip install labels
 ```
 
-Versions follow [Calendar Versioning][calver] using a `YY.MINOR.MICRO` scheme. 🗓
+> Packages on PyPI are managed by upstream.
+
+## Docker
+
+Docker images are available from GitHub and DockerHub.
+
+```console
+docker run -it -e LABELS_TOKEN="${LABELS_TOKEN}" \
+  -v $(pwd)/labels.toml:/home/labels/labels.toml:rw \
+  asaharan3/labels \
+  sync \
+  -o REPO_OWNER \
+  -r REPO NAME \
+  -f labels.toml \
+  -n
+```
+
+## Use as Actions
+
+You can install this as Github Actions.
+
+```yaml
+on:
+  push:
+    branches:
+      - master
+    paths:
+    - '.github/**'
+name: labels
+jobs:
+  labels:
+    - name: sync labels
+      uses: abhi1693/labels@0.3.0+abhi1693 # Use latest version available.
+      with:
+        # owner: "OWNERNAME" # Optional
+        # repo: "REPONAME"   # Optional
+        # file: "FILENAME"   # Optional
+        token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+- If `owner` or `repo` are not specified, values will be calculated from `GITHUB_REPOSITORY` env variable.
+- If file specified is not found, then an attempt is made to fetch it from GitHub.
+- To set labels on multiple repos (use matrix expansion for faster builds).
+  However, You must specify a personal access token with scope `repo` or `public_repo`.
 
 ## Authentication
 
@@ -21,7 +76,6 @@ labels for a public or a private repository. Then set up two environment
 variables in your terminal:
 
 ```bash
-export LABELS_USERNAME="<GITHUB_USERNAME>"
 export LABELS_TOKEN="<GITHUB_TOKEN>"
 ```
 
@@ -174,9 +228,8 @@ Distributed under the terms of the MIT license, **labels** is free and open
 source software.
 
 [PyPI]: https://pypi.org/project/labels/
-[calver]: https://calver.org
-[code of conduct]: https://github.com/hackebrot/labels/blob/main/CODE_OF_CONDUCT.md
-[contributing]: https://github.com/hackebrot/labels/blob/main/.github/CONTRIBUTING.md
+[code of conduct]: https://github.com/hackebrot/labels/blob/master/.github/CODE_OF_CONDUCT.md
+[contributing]: https://github.com/hackebrot/labels/blob/master/.github/CONTRIBUTING.md
 [create token]: https://blog.github.com/2013-05-16-personal-api-tokens/
 [earth_repo]: https://github.com/hackebrot/earth
 [good first issue]: https://github.com/hackebrot/labels/labels/good%20first%20issue

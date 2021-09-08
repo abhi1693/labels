@@ -1,0 +1,52 @@
+# Git and GitHub
+.github
+.gitignore
+.git
+# CI/CD
+.travis.yml
+# Testing
+.tox
+.mypy_cache
+pytest_cache
+tests
+tox.ini
+# Docker configs
+Dockerfile
+Dockerfile.*
+.dockerignore
+# Python cache
+__pycache__
+*.pyc
+# Makefile
+Makefile
+# Automation /Dependency
+.dependabot
+actions.yml
+# Virtual Envs
+.venv
+venv
+virtualenv
+# Build Artifacts
+dist
+# Custom scripts for project
+scripts
+# env configs
+.envrc
+.env
+.pytest_cache
+.coverage
+*.ini
+*.lock
+*.yaml
+.flake8
+*.yml
+.azure
+*.xml
+.vscode
+*.txt
+scripts/
+.editorconfig
+_config.yml
+.hadolint.yaml
+poetry.*
+*.mk
