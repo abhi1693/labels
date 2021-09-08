@@ -1,15 +1,14 @@
 on:
   push:
     branches:
-      - master
-      - dev
+      - main
     paths-ignore:
       - ".gitignore"
       - ".envrc"
       - "**.md"
       - ".dependabot/**"
       - "_config.yml"
-name: dogfood
+name: test
 jobs:
   labels:
     name: test
