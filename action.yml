@@ -1,4 +1,4 @@
-name: "Manage Issue Labels"
+name: "Sync/Manage Issue Labels"
 author: "Abhimanyu Saharan"
 description: "Sync/Manage issue labels defined in .github/labels.toml"
 branding:
@@ -20,5 +20,5 @@ inputs:
     required: true
 runs:
   using: "docker"
-  image: "docker://abhi1693/labels:1.0.0"
+  image: "docker://asaharan3/labels:main"
   entrypoint: /usr/local/bin/entrypoint.sh
