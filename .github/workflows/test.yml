@@ -15,6 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: sync labels
-        uses: abhi1693/labels@master
+        uses: abhi1693/labels@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

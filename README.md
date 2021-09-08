@@ -31,7 +31,7 @@ Docker images are available from GitHub and DockerHub.
 ```console
 docker run -it -e LABELS_TOKEN="${LABELS_TOKEN}" \
   -v $(pwd)/labels.toml:/home/labels/labels.toml:rw \
-  asaharan3/labels \
+  asaharan3/labels:main \
   sync \
   -o REPO_OWNER \
   -r REPO NAME \
