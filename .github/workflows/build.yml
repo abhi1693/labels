@@ -15,69 +15,44 @@ on:
       - "v*"
   pull_request:
 jobs:
-  # lint everything
-  lint:
+  tox:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        linter: [fmt-lint, flake8, mypy]
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.7
-      - name: Install Poetry
-        run: |
-          curl -sSLO https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py
-          python3 get-poetry.py --version 1.0.3
-          echo "::add-path::$HOME/.poetry/bin"
-          rm -f get-poetry.py
-      - name: Install dependencies
-        run: |
-          echo ${PATH}
-          which poetry
-          poetry install -v --no-dev
-          if [[ $LINTER == fmt-* ]]; then
-            pip install black isort[pyproject] pytest responses
-          else
-            pip install "$LINTER"
-          fi
-        env:
-          LINTER: ${{ matrix.linter }}
-      - name: Lint
-        run: poetry run make ${{ matrix.linter }}
+        environment:
+          - "py36"
+          - "py37"
+          - "py38"
+          - "py39"
+          - "flake8"
+          - "mypy"
 
-  # Test on all platforms
-  test:
-    needs: lint
-    strategy:
-      matrix:
-        # os: [macos-latest, windows-latest, ubuntu-latest]
-        os: [ubuntu-latest]
-        pythonVersion: [3.6, 3.7, 3.8, 3.9]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v1
-      - name: Set up Python
-        uses: actions/setup-python@v1
-        with:
-          python-version: ${{ matrix.pythonVersion }}
-      - name: Install Poetry
-        run: |
-          curl -sSLO https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py
-          python3 get-poetry.py --version 1.0.3
-          echo "::add-path::$HOME/.poetry/bin"
-      - name: Install Dependencies
-        run: |
-          echo ${PATH}
-          which poetry
-          poetry install -v
-      - name: Test
-        run: poetry run make test
+        include:
+          - environment: "py36"
+            python: "3.6"
+          - environment: "py37"
+            python: "3.7"
+          - environment: "py38"
+            python: "3.8"
+          - environment: "py39"
+            python: "3.9"
+          - environment: "flake8"
+            python: "3.9"
+          - environment: "mypy"
+            python: "3.9"
 
-      - name: Build
-        run: make dist
+    container:
+      image: python:${{ matrix.python }}
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Install tox
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install tox
+      - name: Run tox
+        run: |
+          tox -e ${{ matrix.environment }}
 
   # Build docker images
   docker:
